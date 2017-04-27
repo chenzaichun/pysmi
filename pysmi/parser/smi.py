@@ -327,7 +327,7 @@ class SmiV2Parser(AbstractParser):
             p[0] = [p[1]]
 
     def p_sequenceItem(self, p):
-        """sequenceItem : LOWERCASE_IDENTIFIER sequenceSyntax"""
+        """sequenceItem : fuzzy_lowercase_identifier sequenceSyntax"""
         p[0] = (p[1], p[2])
 
     def p_Syntax(self, p):
@@ -343,7 +343,7 @@ class SmiV2Parser(AbstractParser):
 
     def p_sequenceSyntax(self, p):
         """sequenceSyntax : BITS
-                          | UPPERCASE_IDENTIFIER anySubType
+                          | fuzzy_lowercase_identifier anySubType
                           | sequenceObjectSyntax"""
         p[0] = p[1]  # no subtype or complex syntax supported
 
@@ -370,7 +370,7 @@ class SmiV2Parser(AbstractParser):
                 p[10])  # objectIdentifier
 
     def p_objectTypeClause(self, p):
-        """objectTypeClause : LOWERCASE_IDENTIFIER OBJECT_TYPE SYNTAX Syntax UnitsPart MaxOrPIBAccessPart STATUS Status descriptionClause ReferPart IndexPart MibIndex DefValPart COLON_COLON_EQUAL '{' ObjectName '}'"""
+        """objectTypeClause : fuzzy_lowercase_identifier OBJECT_TYPE SYNTAX Syntax UnitsPart MaxOrPIBAccessPart STATUS Status descriptionClause ReferPart IndexPart MibIndex DefValPart COLON_COLON_EQUAL '{' ObjectName '}'"""
         p[0] = ('objectTypeClause', p[1],  # id
                 #  p[2], # OBJECT_TYPE
                 p[4],  # syntax
@@ -437,7 +437,7 @@ class SmiV2Parser(AbstractParser):
         p[0] = ('MaxAccessPart', p[2])
 
     def p_notificationTypeClause(self, p):
-        """notificationTypeClause : LOWERCASE_IDENTIFIER NOTIFICATION_TYPE NotificationObjectsPart STATUS Status DESCRIPTION Text ReferPart COLON_COLON_EQUAL '{' NotificationName '}'"""
+        """notificationTypeClause : fuzzy_lowercase_identifier NOTIFICATION_TYPE NotificationObjectsPart STATUS Status DESCRIPTION Text ReferPart COLON_COLON_EQUAL '{' NotificationName '}'"""
         p[0] = ('notificationTypeClause',
                 p[1],  # id
                 #  p[2], # NOTIFICATION_TYPE
