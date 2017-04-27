@@ -194,7 +194,6 @@ class JsonCodeGen(AbstractCodeGen):
                 if parent not in self.symbolTable[module]:
                     raise error.PySmiSemanticError('no symbol "%s" in module "%s"' % (parent, module))
                 numericOid += self.genNumericOid(self.symbolTable[module][parent]['oid'])
-
             else:
                 numericOid += (part,)
 
@@ -497,7 +496,7 @@ class JsonCodeGen(AbstractCodeGen):
 
         outDict = OrderedDict()
         outDict['name'] = name
-        outDict['oid'] = enterpriseStr + '0.' + str(value)
+        outDict['oid'] = enterpriseStr + '.' + str(value)
         outDict['class'] = 'notificationtype'
 
         if variables:
