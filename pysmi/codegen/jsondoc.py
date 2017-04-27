@@ -357,6 +357,9 @@ class JsonCodeGen(AbstractCodeGen):
         outDict['name'] = name
         outDict['oid'] = oidStr
         outDict['class'] = 'notificationtype'
+        parentid, trapid = outDict['oid'].rsplit('.', 1)
+        outDict['trapparent'], outDict['trapid']  = parentid, int(trapid)
+
 
         if objects:
             outDict['objects'] = [{'module': self.moduleName[0], 'object': self.transOpers(obj)} for obj in objects]
@@ -498,6 +501,8 @@ class JsonCodeGen(AbstractCodeGen):
         outDict['name'] = name
         outDict['oid'] = enterpriseStr + '.' + str(value)
         outDict['class'] = 'notificationtype'
+        parentid, trapid = outDict['oid'].rsplit('.', 1)
+        outDict['trapparent'], outDict['trapid']  = parentid, int(trapid)
 
         if variables:
             outDict['objects'] = [{'module': self.moduleName[0], 'object': self.transOpers(obj)} for obj in variables]
